@@ -40,6 +40,15 @@ public class PontoDeFocoService {
         return pontoDeFocoRepository.save(ponto);
     }
 
+    public void atualizarValidade(Long id, boolean novoValor) {
+        PontoDeFoco foco = pontoDeFocoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ponto de foco não encontrado"));
+
+        foco.setValido(novoValor);
+        pontoDeFocoRepository.save(foco);
+    }
+
+
     public PontoDeFocoDTO toDTO(PontoDeFoco ponto) {
         return new PontoDeFocoDTO(
                 ponto.getId(),

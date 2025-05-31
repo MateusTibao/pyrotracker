@@ -1,6 +1,7 @@
 package br.com.pyrotracker.controller;
 
 import br.com.pyrotracker.domain.PontoDeFoco;
+import br.com.pyrotracker.dto.AtualizarValidadeDTO;
 import br.com.pyrotracker.dto.PontoDeFocoCreateDTO;
 import br.com.pyrotracker.dto.PontoDeFocoDTO;
 import br.com.pyrotracker.service.PontoDeFocoService;
@@ -26,6 +27,14 @@ public class PontoDeFocoController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
     }
+
+    @PutMapping("/{id}/validade")
+    public ResponseEntity<Void> atualizarValidade(@PathVariable Long id,
+                                                  @RequestBody AtualizarValidadeDTO dto) {
+        pontoDeFocoService.atualizarValidade(id, dto.isValido());
+        return ResponseEntity.noContent().build();
+    }
+
 
     @PostMapping
     public ResponseEntity<PontoDeFocoDTO> cadastrar(@RequestBody PontoDeFocoCreateDTO dto) {

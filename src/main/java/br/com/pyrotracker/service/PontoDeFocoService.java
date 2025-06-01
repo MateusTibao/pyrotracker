@@ -4,6 +4,7 @@ import br.com.pyrotracker.domain.PontoDeFoco;
 import br.com.pyrotracker.domain.Usuario;
 import br.com.pyrotracker.dto.PontoDeFocoCreateDTO;
 import br.com.pyrotracker.dto.PontoDeFocoDTO;
+import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
 import br.com.pyrotracker.repository.PontoDeFocoRepository;
 import br.com.pyrotracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class PontoDeFocoService {
 
     public void atualizarValidade(Long id, boolean novoValor) {
         PontoDeFoco foco = pontoDeFocoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ponto de foco não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Ponto de foco não encontrado com ID: " + id));
 
         foco.setValido(novoValor);
         pontoDeFocoRepository.save(foco);

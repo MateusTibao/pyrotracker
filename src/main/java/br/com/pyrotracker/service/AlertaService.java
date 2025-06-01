@@ -5,6 +5,7 @@ import br.com.pyrotracker.domain.PontoDeFoco;
 import br.com.pyrotracker.domain.StatusAlerta;
 import br.com.pyrotracker.dto.AlertaCreateDTO;
 import br.com.pyrotracker.dto.AlertaDTO;
+import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
 import br.com.pyrotracker.repository.AlertaRepository;
 import br.com.pyrotracker.repository.PontoDeFocoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class AlertaService {
 
     public Alerta atualizarStatus(Long id, StatusAlerta novoStatus) {
         Alerta alerta = alertaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Alerta não encontrado"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Alerta não encontrado com ID: " + id));
 
         alerta.setStatus(novoStatus);
 

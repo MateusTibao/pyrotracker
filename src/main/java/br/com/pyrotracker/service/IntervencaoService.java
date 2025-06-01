@@ -6,6 +6,7 @@ import br.com.pyrotracker.domain.StatusAlerta;
 import br.com.pyrotracker.domain.StatusIntervencao;
 import br.com.pyrotracker.dto.IntervencaoCreateDTO;
 import br.com.pyrotracker.dto.IntervencaoDTO;
+import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
 import br.com.pyrotracker.repository.AlertaRepository;
 import br.com.pyrotracker.repository.IntervencaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class IntervencaoService {
 
     public Intervencao atualizarStatus(Long id, StatusIntervencao novoStatus) {
         Intervencao intervencao = intervencaoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Intervenção não encontrada"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Intervenção não encontrado com ID: " + id));
 
         intervencao.setStatus(novoStatus);
 
@@ -60,7 +61,7 @@ public class IntervencaoService {
 
     public Intervencao cadastrar(IntervencaoCreateDTO dto) {
         Alerta alerta = alertaRepository.findById(dto.getAlertaId())
-                .orElseThrow(() -> new RuntimeException("Alerta não encontrado com ID: " + dto.getAlertaId()));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Alerta não encontrado com ID: " + dto.getAlertaId()));
 
         Intervencao intervencao = new Intervencao();
         intervencao.setEquipeResponsavel(dto.getEquipeResponsavel());

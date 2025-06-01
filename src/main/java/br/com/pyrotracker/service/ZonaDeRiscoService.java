@@ -5,6 +5,7 @@ import br.com.pyrotracker.domain.ZonaDeRisco;
 import br.com.pyrotracker.dto.ZonaDeRiscoCreateDTO;
 import br.com.pyrotracker.dto.ZonaDeRiscoDTO;
 import br.com.pyrotracker.dto.ZonaDeRiscoUpdateDTO;
+import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
 import br.com.pyrotracker.repository.AlertaRepository;
 import br.com.pyrotracker.repository.ZonaDeRiscoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class ZonaDeRiscoService {
 
     public ZonaDeRisco atualizarZona(Long id, ZonaDeRiscoUpdateDTO dto) {
         ZonaDeRisco zona = zonaDeRiscoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Zona de risco não encontrada"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Zona de risco não encontrado com ID: " + id));
 
         zona.setNivelRisco(dto.getNivelRisco());
 

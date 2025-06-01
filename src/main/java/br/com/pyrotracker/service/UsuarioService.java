@@ -3,6 +3,7 @@ package br.com.pyrotracker.service;
 import br.com.pyrotracker.domain.Usuario;
 import br.com.pyrotracker.dto.UsuarioCreateDTO;
 import br.com.pyrotracker.dto.UsuarioDTO;
+import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
 import br.com.pyrotracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class UsuarioService {
 
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com ID: " + id));
     }
 
     public Usuario cadastrar(UsuarioCreateDTO dto) {
@@ -41,7 +42,7 @@ public class UsuarioService {
 
     public void deletar(Long id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new RuntimeException("Usuário não encontrado com ID: " + id);
+            throw new RecursoNaoEncontradoException("Usuário não encontrado com ID: " + id);
         }
         usuarioRepository.deleteById(id);
     }

@@ -3,6 +3,7 @@ package br.com.pyrotracker.controller;
 import br.com.pyrotracker.domain.ZonaDeRisco;
 import br.com.pyrotracker.dto.ZonaDeRiscoCreateDTO;
 import br.com.pyrotracker.dto.ZonaDeRiscoDTO;
+import br.com.pyrotracker.dto.ZonaDeRiscoUpdateDTO;
 import br.com.pyrotracker.service.ZonaDeRiscoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,11 @@ public class ZonaDeRiscoController {
     public ResponseEntity<ZonaDeRiscoDTO> cadastrar(@RequestBody ZonaDeRiscoCreateDTO dto) {
         ZonaDeRisco nova = zonaDeRiscoService.cadastrar(dto);
         return ResponseEntity.status(201).body(zonaDeRiscoService.toDTO(nova));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ZonaDeRiscoDTO> atualizarZona(@PathVariable Long id, @RequestBody ZonaDeRiscoUpdateDTO dto) {
+        ZonaDeRisco zonaAtualizada = zonaDeRiscoService.atualizarZona(id, dto);
+        return ResponseEntity.ok(zonaDeRiscoService.toDTO(zonaAtualizada));
     }
 }

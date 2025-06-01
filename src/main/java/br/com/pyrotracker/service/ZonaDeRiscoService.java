@@ -4,6 +4,7 @@ import br.com.pyrotracker.domain.Alerta;
 import br.com.pyrotracker.domain.ZonaDeRisco;
 import br.com.pyrotracker.dto.ZonaDeRiscoCreateDTO;
 import br.com.pyrotracker.dto.ZonaDeRiscoDTO;
+import br.com.pyrotracker.dto.ZonaDeRiscoUpdateDTO;
 import br.com.pyrotracker.repository.AlertaRepository;
 import br.com.pyrotracker.repository.ZonaDeRiscoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,27 @@ public class ZonaDeRiscoService {
 
         return zonaDeRiscoRepository.save(zona);
     }
+
+    public ZonaDeRisco atualizarZona(Long id, ZonaDeRiscoUpdateDTO dto) {
+        ZonaDeRisco zona = zonaDeRiscoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Zona de risco não encontrada"));
+
+        zona.setNivelRisco(dto.getNivelRisco());
+
+        if (dto.getIdsAlertasRelacionados() != null && !dto.getIdsAlertasRelacionados().isEmpty()) {
+            List<Alerta> alertas = alertaRepository.findAllById(dto.getIdsAlertasRelacionados());
+
+            for (Alerta alerta : alertas) {
+                if (zona.getAlertas().contains(alerta)) {
+                    throw new RuntimeException("Alerta com ID " + alerta.getId() + " já está relacionado com esta zona.");
+                }
+                zona.getAlertas().add(alerta);
+            }
+        }
+
+        return zonaDeRiscoRepository.save(zona);
+    }
+
 
     public ZonaDeRiscoDTO toDTO(ZonaDeRisco zona) {
         List<Long> idsAlertas = zona.getAlertas().stream()

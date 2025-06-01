@@ -2,6 +2,7 @@ package br.com.pyrotracker.service;
 
 import br.com.pyrotracker.domain.Alerta;
 import br.com.pyrotracker.domain.PontoDeFoco;
+import br.com.pyrotracker.domain.StatusAlerta;
 import br.com.pyrotracker.dto.AlertaCreateDTO;
 import br.com.pyrotracker.dto.AlertaDTO;
 import br.com.pyrotracker.repository.AlertaRepository;
@@ -9,6 +10,7 @@ import br.com.pyrotracker.repository.PontoDeFocoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -38,6 +40,19 @@ public class AlertaService {
         alerta.setLongitude(dto.getLongitude());
         alerta.setCriticidade(dto.getCriticidade());
         alerta.setPontosRelacionados(pontos);
+
+        return alertaRepository.save(alerta);
+    }
+
+    public Alerta atualizarStatus(Long id, StatusAlerta novoStatus) {
+        Alerta alerta = alertaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Alerta não encontrado"));
+
+        alerta.setStatus(novoStatus);
+
+        if (novoStatus == StatusAlerta.ENCERRADO) {
+            alerta.setDataEncerramento(LocalDateTime.now());
+        }
 
         return alertaRepository.save(alerta);
     }

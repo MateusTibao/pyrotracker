@@ -3,6 +3,7 @@ package br.com.pyrotracker.controller;
 import br.com.pyrotracker.domain.Alerta;
 import br.com.pyrotracker.dto.AlertaCreateDTO;
 import br.com.pyrotracker.dto.AlertaDTO;
+import br.com.pyrotracker.dto.AlertaStatusDTO;
 import br.com.pyrotracker.service.AlertaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,4 +33,11 @@ public class AlertaController {
         Alerta novo = alertaService.cadastrar(dto);
         return ResponseEntity.status(201).body(alertaService.toDTO(novo));
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<AlertaDTO> atualizarStatus(@PathVariable Long id, @RequestBody AlertaStatusDTO dto) {
+        Alerta alertaAtualizado = alertaService.atualizarStatus(id, dto.getStatus());
+        return ResponseEntity.ok(alertaService.toDTO(alertaAtualizado));
+    }
+
 }

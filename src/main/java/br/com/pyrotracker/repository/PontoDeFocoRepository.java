@@ -8,4 +8,7 @@ import java.util.List;
 public interface PontoDeFocoRepository extends JpaRepository<PontoDeFoco, Long> {
 
     List<PontoDeFoco> findByUsuarioId(Long usuarioId);
+
+    List<PontoDeFoco> findByValido(boolean valido);
+
 }

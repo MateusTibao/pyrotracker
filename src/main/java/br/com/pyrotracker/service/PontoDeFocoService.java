@@ -34,7 +34,7 @@ public class PontoDeFocoService {
         ponto.setNivelFumaca(dto.getNivelFumaca());
         ponto.setComentario(dto.getComentario());
         ponto.setFotoUrl(dto.getFotoUrl());
-        ponto.setValido(false);  // começa como inválido
+        ponto.setValido(false);
         ponto.setUsuario(usuario);
 
         return pontoDeFocoRepository.save(ponto);
@@ -46,6 +46,20 @@ public class PontoDeFocoService {
 
         foco.setValido(novoValor);
         pontoDeFocoRepository.save(foco);
+    }
+
+    public List<PontoDeFocoDTO> listarPorValidade(Boolean valido) {
+        List<PontoDeFoco> focos;
+
+        if (valido == null) {
+            focos = pontoDeFocoRepository.findAll();
+        } else {
+            focos = pontoDeFocoRepository.findByValido(valido);
+        }
+
+        return focos.stream()
+                .map(this::toDTO)
+                .toList();
     }
 
 

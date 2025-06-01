@@ -11,6 +11,5 @@ public class PontoDeFocoCreateDTO {
     private Integer nivelFumaca;
     private String comentario;
     private String fotoUrl;
-
-    private Long usuarioId; // necessário pra saber quem criou
+    private Long usuarioId;
 }

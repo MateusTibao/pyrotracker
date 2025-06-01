@@ -20,13 +20,11 @@ public class PontoDeFocoController {
     private PontoDeFocoService pontoDeFocoService;
 
     @GetMapping
-    public ResponseEntity<List<PontoDeFocoDTO>> listarTodos() {
-        List<PontoDeFoco> focos = pontoDeFocoService.listarTodos();
-        List<PontoDeFocoDTO> dtos = focos.stream()
-                .map(pontoDeFocoService::toDTO)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<PontoDeFocoDTO>> listarTodos(@RequestParam(required = false) Boolean valido) {
+        List<PontoDeFocoDTO> dtos = pontoDeFocoService.listarPorValidade(valido);
         return ResponseEntity.ok(dtos);
     }
+
 
     @PutMapping("/{id}/validade")
     public ResponseEntity<Void> atualizarValidade(@PathVariable Long id,
@@ -34,7 +32,6 @@ public class PontoDeFocoController {
         pontoDeFocoService.atualizarValidade(id, dto.isValido());
         return ResponseEntity.noContent().build();
     }
-
 
     @PostMapping
     public ResponseEntity<PontoDeFocoDTO> cadastrar(@RequestBody PontoDeFocoCreateDTO dto) {

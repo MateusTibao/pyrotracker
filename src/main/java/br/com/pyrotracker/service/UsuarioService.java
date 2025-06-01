@@ -33,7 +33,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
-        usuario.setReputacao(50); // padrão inicial
+        usuario.setReputacao(50);
 
         return usuarioRepository.save(usuario);
     }

@@ -9,5 +9,5 @@ public class IntervencaoCreateDTO {
 
     private String equipeResponsavel;
     private String descricaoOperacao;
-    private Long alertaId; // Alerta relacionado
+    private Long alertaId;
 }

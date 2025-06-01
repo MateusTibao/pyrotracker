@@ -25,10 +25,12 @@ public class AlertaService {
     }
 
     public Alerta cadastrar(AlertaCreateDTO dto) {
-        List<PontoDeFoco> pontos = pontoDeFocoRepository.findAllById(dto.getIdsPontosRelacionados());
+        List<PontoDeFoco> pontos = pontoDeFocoRepository.findAllById(dto.getIdsPontosRelacionados()).stream()
+                .filter(PontoDeFoco::getValido)
+                .toList();
 
-        if (pontos.size() != dto.getIdsPontosRelacionados().size()) {
-            throw new RuntimeException("Alguns pontos informados não foram encontrados.");
+        if (pontos.isEmpty()) {
+            throw new RuntimeException("Não é possível criar um alerta sem pontos de foco válidos.");
         }
 
         Alerta alerta = new Alerta();
@@ -39,6 +41,7 @@ public class AlertaService {
 
         return alertaRepository.save(alerta);
     }
+
 
     public AlertaDTO toDTO(Alerta alerta) {
         List<Long> idsPontos = alerta.getPontosRelacionados().stream()

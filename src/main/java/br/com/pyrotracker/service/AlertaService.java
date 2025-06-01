@@ -6,6 +6,7 @@ import br.com.pyrotracker.domain.StatusAlerta;
 import br.com.pyrotracker.dto.AlertaCreateDTO;
 import br.com.pyrotracker.dto.AlertaDTO;
 import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
+import br.com.pyrotracker.exception.RegraDeNegocioException;
 import br.com.pyrotracker.repository.AlertaRepository;
 import br.com.pyrotracker.repository.PontoDeFocoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class AlertaService {
                 .toList();
 
         if (pontos.isEmpty()) {
-            throw new RuntimeException("Não é possível criar um alerta sem pontos de foco válidos.");
+            throw new RegraDeNegocioException("Não é possível criar um alerta sem pontos de foco válidos.");
         }
 
         Alerta alerta = new Alerta();

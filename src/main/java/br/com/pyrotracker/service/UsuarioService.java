@@ -4,6 +4,7 @@ import br.com.pyrotracker.domain.Usuario;
 import br.com.pyrotracker.dto.UsuarioCreateDTO;
 import br.com.pyrotracker.dto.UsuarioDTO;
 import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
+import br.com.pyrotracker.exception.RegraDeNegocioException;
 import br.com.pyrotracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UsuarioService {
 
     public Usuario cadastrar(UsuarioCreateDTO dto) {
         if (usuarioRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("Já existe um usuário com este e-mail.");
+            throw new RegraDeNegocioException("Já existe um usuário com este e-mail.");
         }
 
         Usuario usuario = new Usuario();

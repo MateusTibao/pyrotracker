@@ -6,6 +6,7 @@ import br.com.pyrotracker.dto.ZonaDeRiscoCreateDTO;
 import br.com.pyrotracker.dto.ZonaDeRiscoDTO;
 import br.com.pyrotracker.dto.ZonaDeRiscoUpdateDTO;
 import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
+import br.com.pyrotracker.exception.RegraDeNegocioException;
 import br.com.pyrotracker.repository.AlertaRepository;
 import br.com.pyrotracker.repository.ZonaDeRiscoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ZonaDeRiscoService {
         List<Alerta> alertas = alertaRepository.findAllById(dto.getIdsAlertasRelacionados());
 
         if (alertas.size() != dto.getIdsAlertasRelacionados().size()) {
-            throw new RuntimeException("Alguns alertas informados não foram encontrados.");
+            throw new RegraDeNegocioException("Alguns alertas informados não foram encontrados.");
         }
 
         ZonaDeRisco zona = new ZonaDeRisco();
@@ -53,7 +54,7 @@ public class ZonaDeRiscoService {
 
             for (Alerta alerta : alertas) {
                 if (zona.getAlertas().contains(alerta)) {
-                    throw new RuntimeException("Alerta com ID " + alerta.getId() + " já está relacionado com esta zona.");
+                    throw new RegraDeNegocioException("Alerta com ID " + alerta.getId() + " já está relacionado com esta zona.");
                 }
                 zona.getAlertas().add(alerta);
             }

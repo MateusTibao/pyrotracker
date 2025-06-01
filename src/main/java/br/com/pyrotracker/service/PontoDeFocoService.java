@@ -27,7 +27,7 @@ public class PontoDeFocoService {
 
     public PontoDeFoco cadastrar(PontoDeFocoCreateDTO dto) {
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + dto.getUsuarioId()));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com ID: " + dto.getUsuarioId()));
 
         PontoDeFoco ponto = new PontoDeFoco();
         ponto.setLatitude(dto.getLatitude());

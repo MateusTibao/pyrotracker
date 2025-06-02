@@ -2,6 +2,7 @@ package br.com.pyrotracker.controller;
 
 import br.com.pyrotracker.domain.Usuario;
 import br.com.pyrotracker.dto.AuthRequestDTO;
+import br.com.pyrotracker.dto.UsuarioCreateDTO;
 import br.com.pyrotracker.security.JwtUtil;
 import br.com.pyrotracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,24 @@ public class AuthController {
         response.put("token", token);
         response.put("usuario", usuario.getEmail());
 
+        return response;
+    }
+
+    @PostMapping("/register")
+    public Map<String, Object> register(@RequestBody UsuarioCreateDTO dto) {
+        if (usuarioRepository.existsByEmail(dto.getEmail())) {
+            throw new RuntimeException("Usuário já existe");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+        usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+        usuario.setReputacao(50);
+        usuarioRepository.save(usuario);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensagem", "Usuário registrado com sucesso");
         return response;
     }
 }

@@ -24,5 +24,8 @@ public class Usuario {
     private String senha;
 
     private int reputacao;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
 

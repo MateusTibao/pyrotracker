@@ -1,8 +1,7 @@
 package br.com.pyrotracker.dto;
 
 import br.com.pyrotracker.domain.StatusIntervencao;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter

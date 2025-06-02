@@ -1,7 +1,6 @@
 package br.com.pyrotracker.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter

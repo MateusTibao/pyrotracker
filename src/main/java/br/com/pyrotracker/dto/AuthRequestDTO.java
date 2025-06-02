@@ -4,8 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-public class UsuarioCreateDTO {
-    private String nome;
+public class AuthRequestDTO {
     private String email;
     private String senha;
 }

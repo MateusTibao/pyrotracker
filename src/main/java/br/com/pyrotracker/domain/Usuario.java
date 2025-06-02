@@ -20,6 +20,9 @@ public class Usuario {
     @Column(unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String senha;
+
     private int reputacao;
 }
 

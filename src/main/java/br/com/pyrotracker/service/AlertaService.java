@@ -2,7 +2,7 @@ package br.com.pyrotracker.service;
 
 import br.com.pyrotracker.domain.Alerta;
 import br.com.pyrotracker.domain.PontoDeFoco;
-import br.com.pyrotracker.domain.StatusAlerta;
+import br.com.pyrotracker.domain.enums.StatusAlerta;
 import br.com.pyrotracker.dto.AlertaCreateDTO;
 import br.com.pyrotracker.dto.AlertaDTO;
 import br.com.pyrotracker.exception.RecursoNaoEncontradoException;

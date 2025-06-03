@@ -1,7 +1,7 @@
 package br.com.pyrotracker.repository;
 
 import br.com.pyrotracker.domain.Alerta;
-import br.com.pyrotracker.domain.Criticidade;
+import br.com.pyrotracker.domain.enums.Criticidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

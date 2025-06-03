@@ -1,5 +1,6 @@
 package br.com.pyrotracker.domain;
 
+import br.com.pyrotracker.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

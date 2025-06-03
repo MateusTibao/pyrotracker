@@ -1,6 +1,6 @@
 package br.com.pyrotracker.dto;
 
-import br.com.pyrotracker.domain.NivelRisco;
+import br.com.pyrotracker.domain.enums.NivelRisco;
 import lombok.*;
 
 import java.time.LocalDateTime;

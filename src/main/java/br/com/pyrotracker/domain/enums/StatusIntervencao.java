@@ -1,4 +1,4 @@
-package br.com.pyrotracker.domain;
+package br.com.pyrotracker.domain.enums;
 
 public enum StatusIntervencao {
     AGUARDANDO,

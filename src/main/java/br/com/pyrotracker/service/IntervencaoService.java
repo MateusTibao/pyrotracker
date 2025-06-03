@@ -2,8 +2,8 @@ package br.com.pyrotracker.service;
 
 import br.com.pyrotracker.domain.Alerta;
 import br.com.pyrotracker.domain.Intervencao;
-import br.com.pyrotracker.domain.StatusAlerta;
-import br.com.pyrotracker.domain.StatusIntervencao;
+import br.com.pyrotracker.domain.enums.StatusAlerta;
+import br.com.pyrotracker.domain.enums.StatusIntervencao;
 import br.com.pyrotracker.dto.IntervencaoCreateDTO;
 import br.com.pyrotracker.dto.IntervencaoDTO;
 import br.com.pyrotracker.exception.RecursoNaoEncontradoException;

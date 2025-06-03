@@ -1,6 +1,6 @@
 package br.com.pyrotracker.dto;
 
-import br.com.pyrotracker.domain.Role;
+import br.com.pyrotracker.domain.enums.Role;
 import lombok.*;
 
 @Getter

@@ -1,6 +1,6 @@
 package br.com.pyrotracker.dto;
 
-import br.com.pyrotracker.domain.StatusAlerta;
+import br.com.pyrotracker.domain.enums.StatusAlerta;
 import lombok.*;
 
 @Getter

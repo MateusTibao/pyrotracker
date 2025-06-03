@@ -1,7 +1,7 @@
 package br.com.pyrotracker.dto;
 
-import br.com.pyrotracker.domain.Criticidade;
-import br.com.pyrotracker.domain.StatusAlerta;
+import br.com.pyrotracker.domain.enums.Criticidade;
+import br.com.pyrotracker.domain.enums.StatusAlerta;
 import lombok.*;
 
 import java.time.LocalDateTime;

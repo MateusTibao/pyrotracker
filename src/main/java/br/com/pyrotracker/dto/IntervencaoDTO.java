@@ -1,6 +1,6 @@
 package br.com.pyrotracker.dto;
 
-import br.com.pyrotracker.domain.StatusIntervencao;
+import br.com.pyrotracker.domain.enums.StatusIntervencao;
 import lombok.*;
 
 import java.time.LocalDateTime;

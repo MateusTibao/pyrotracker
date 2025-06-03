@@ -1,6 +1,6 @@
 package br.com.pyrotracker.repository;
 
-import br.com.pyrotracker.domain.NivelRisco;
+import br.com.pyrotracker.domain.enums.NivelRisco;
 import br.com.pyrotracker.domain.ZonaDeRisco;
 import org.springframework.data.jpa.repository.JpaRepository;
 

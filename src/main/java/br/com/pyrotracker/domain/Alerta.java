@@ -1,5 +1,7 @@
 package br.com.pyrotracker.domain;
 
+import br.com.pyrotracker.domain.enums.Criticidade;
+import br.com.pyrotracker.domain.enums.StatusAlerta;
 import jakarta.persistence.*;
 import lombok.*;
 

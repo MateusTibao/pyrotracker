@@ -8,6 +8,8 @@ import br.com.pyrotracker.exception.RecursoNaoEncontradoException;
 import br.com.pyrotracker.repository.PontoDeFocoRepository;
 import br.com.pyrotracker.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +28,11 @@ public class PontoDeFocoService {
     }
 
     public PontoDeFoco cadastrar(PontoDeFocoCreateDTO dto) {
-        Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com ID: " + dto.getUsuarioId()));
+        String email = ((UserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal()).getUsername();
+
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com e-mail: " + email));
 
         PontoDeFoco ponto = new PontoDeFoco();
         ponto.setLatitude(dto.getLatitude());

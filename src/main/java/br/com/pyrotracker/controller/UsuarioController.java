@@ -2,10 +2,12 @@ package br.com.pyrotracker.controller;
 
 import br.com.pyrotracker.domain.Usuario;
 import br.com.pyrotracker.dto.UsuarioCreateDTO;
+import br.com.pyrotracker.dto.UsuarioReputacaoDTO;
 import br.com.pyrotracker.service.UsuarioService;
 import br.com.pyrotracker.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,4 +44,12 @@ public class UsuarioController {
         usuarioService.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}/reputacao")
+    @PreAuthorize("hasAnyRole('AGENTE', 'ADMIN')")
+    public ResponseEntity<Void> atualizarReputacao(@PathVariable Long id, @RequestBody UsuarioReputacaoDTO dto) {
+        usuarioService.atualizarReputacao(id, dto.getValor());
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -7,6 +7,7 @@ import br.com.pyrotracker.dto.PontoDeFocoDTO;
 import br.com.pyrotracker.service.PontoDeFocoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +27,14 @@ public class PontoDeFocoController {
     }
 
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENTE')")
     @PutMapping("/{id}/validade")
     public ResponseEntity<Void> atualizarValidade(@PathVariable Long id,
                                                   @RequestBody AtualizarValidadeDTO dto) {
         pontoDeFocoService.atualizarValidade(id, dto.isValido());
         return ResponseEntity.noContent().build();
     }
+
 
     @PostMapping
     public ResponseEntity<PontoDeFocoDTO> cadastrar(@RequestBody PontoDeFocoCreateDTO dto) {

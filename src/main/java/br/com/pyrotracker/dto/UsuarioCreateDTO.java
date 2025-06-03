@@ -1,5 +1,6 @@
 package br.com.pyrotracker.dto;
 
+import br.com.pyrotracker.domain.Role;
 import lombok.*;
 
 @Getter
@@ -8,4 +9,5 @@ public class UsuarioCreateDTO {
     private String nome;
     private String email;
     private String senha;
+    private Role role;
 }

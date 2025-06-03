@@ -11,11 +11,14 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final long EXPIRATION_TIME = 86400000; // 1 dia
+    private static final long EXPIRATION_TIME = 86400000;
 
     private final SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     public String generateToken(Usuario usuario) {
+        if (usuario.getRole() == null) {
+            throw new IllegalStateException("Usuário sem role definida.");
+        }
         return Jwts.builder()
                 .setSubject(usuario.getEmail())
                 .claim("role", usuario.getRole().name())

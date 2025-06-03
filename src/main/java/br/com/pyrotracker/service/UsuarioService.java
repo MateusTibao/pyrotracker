@@ -40,6 +40,7 @@ public class UsuarioService {
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+        usuario.setRole(dto.getRole());
         usuario.setReputacao(50);
 
         return usuarioRepository.save(usuario);
@@ -51,6 +52,16 @@ public class UsuarioService {
             throw new RecursoNaoEncontradoException("Usuário não encontrado com ID: " + id);
         }
         usuarioRepository.deleteById(id);
+    }
+
+    public void atualizarReputacao(Long id, int valor) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Usuário não encontrado com ID: " + id));
+
+        int novaReputacao = Math.max(0, Math.min(100, valor));
+
+        usuario.setReputacao(novaReputacao);
+        usuarioRepository.save(usuario);
     }
 
     public UsuarioDTO toDTO(Usuario usuario) {

@@ -17,8 +17,7 @@ public class UsuarioDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Se quiser roles no futuro, retorna aqui.
-        return Collections.emptyList();
+        return Collections.singleton(() -> "ROLE_" + usuario.getRole().name());
     }
 
     @Override

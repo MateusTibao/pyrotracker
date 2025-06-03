@@ -35,7 +35,7 @@ public class AuthController {
             throw new RuntimeException("Senha inválida");
         }
 
-        String token = jwtUtil.generateToken(usuario);;
+        String token = jwtUtil.generateToken(usuario);
 
         Map<String, Object> response = new HashMap<>();
         response.put("token", token);
@@ -55,6 +55,8 @@ public class AuthController {
         usuario.setEmail(dto.getEmail());
         usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
         usuario.setReputacao(50);
+        usuario.setRole(dto.getRole());
+
         usuarioRepository.save(usuario);
 
         Map<String, Object> response = new HashMap<>();

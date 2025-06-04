@@ -101,6 +101,9 @@ Para garantir a **segurança e autenticação**, foi implementado o **Spring Sec
 
 ## 📖 Instruções de Uso da API
 
+#### 📺 Vídeo demonstrativo:
+https://youtu.be/lbrrTvod3C0
+
 
 ### 🔐 Autenticação (`/auth`)
 

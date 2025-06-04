@@ -115,10 +115,10 @@ Registra um novo usuário. O perfil é definido no corpo da requisição.
 **Exemplo de Body:**
 ```json
 {
-  "nome": "João",
-  "email": "joao@email.com",
-  "senha": "12345",
-  "role": "USUARIO"
+  "nome": "Administrador Tibão",
+  "email": "tibao@pyrotracer.com",
+  "senha": "DEZnaGS",
+  "role": "ADMIN"
 }
 ```
 
@@ -132,8 +132,8 @@ Realiza o login e retorna um token JWT.
 **Exemplo de Body:**
 ```json
 {
-  "email": "joao@email.com",
-  "senha": "12345"
+  "email": "hideki@pyrotracer.com",
+  "senha": "EsseTrabalhoMerece"
 }
 ```
 
@@ -156,11 +156,11 @@ Cadastra um novo ponto de foco vinculado ao usuário autenticado.
 **Exemplo de Body:**
 ```json
 {
-  "latitude": -23.5,
-  "longitude": -46.6,
-  "nivelFumaca": 3,
-  "comentario": "Fumaça densa",
-  "fotoUrl": "http://exemplo.com/imagem.jpg"
+  "latitude": -10.12,
+  "longitude": -53.88,
+  "nivelFumaca": 2,
+  "comentario": "Fogo na mata",
+  "fotoUrl": "http://foto.com/fogo123.jpg.."
 }
 ```
 
@@ -197,22 +197,24 @@ Cadastra um novo alerta com base em ponto de foco validado.
 **Exemplo de Body:**
 ```json
 {
-  "pontoDeFocoId": 1,
-  "gravidade": "ALTA"
+  "latitude": -10.12,
+  "longitude": -54.88,
+  "criticidade": "MEDIO",
+  "idsPontosRelacionados": [1,2]
 }
 ```
 
 ---
 
-#### `PUT /alertas/{id}`
-Atualiza um alerta existente (gravidade, status, etc.).
+#### `PUT /alertas/{id}/status`
+Atualiza um alerta existente.
 
 **Permissão:** AGENTE, ADMIN
 
 **Exemplo de Body:**
 ```json
 {
-  "gravidade": "MODERADA"
+  "status": "CONTIDO"
 }
 ```
 
@@ -235,22 +237,23 @@ Registra uma nova ação de combate a incêndio.
 **Exemplo de Body:**
 ```json
 {
-  "alertaId": 1,
-  "descricao": "Equipe deslocada ao local"
+  "equipeResponsavel": "Brigada Cerrado Bravo",
+  "descricaoOperacao": "Ação coordenada de contenção com apoio aéreo.",
+  "alertaId": 1
 }
 ```
 
 ---
 
-#### `PUT /intervencoes/{id}`
-Atualiza uma intervenção (descrição, status, etc.).
+#### `PUT /intervencoes/{id}/status`
+Atualiza uma intervenção.
 
 **Permissão:** AGENTE, ADMIN
 
 **Exemplo de Body:**
 ```json
 {
-  "descricao": "Incêndio contido com sucesso"
+  "status": "FINALIZADA_COM_SUCESSO"
 }
 ```
 
@@ -273,8 +276,10 @@ Cadastra uma nova zona com base em variáveis geográficas.
 **Exemplo de Body:**
 ```json
 {
-  "nome": "Zona Norte",
-  "nivelRisco": "ALTO"
+  "regiao": "Chapada dos Veadeiros",
+  "nivelRisco": "ALTO",
+  "comentario": "Área com alerta recorrente",
+  "idsAlertasRelacionados": [1]
 }
 ```
 

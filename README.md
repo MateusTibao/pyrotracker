@@ -6,7 +6,7 @@
 
 ## 📚 Índice
 
-- [👥 Equipe](#️-Equipe)
+- [👥 Equipe](#️-equipe)
 - [🌍 Descrição Geral do Projeto](#️-descrição-geral-do-projeto)
 - [⚙️ Funcionalidades Principais](#️-funcionalidades-principais)
 - [🧠 Justificativas Técnicas e Arquitetura da Solução](#-justificativas-técnicas-e-arquitetura-da-solução)
